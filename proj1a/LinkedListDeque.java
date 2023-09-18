@@ -51,7 +51,12 @@ public class LinkedListDeque<T> {
     }
 
     public void printDeque() {
-
+        Node p = sentinel.next;
+        for (int i = 0; i < size - 1; i++) {
+            System.out.print(p.item + " ");
+            p = p.next;
+        }
+        System.out.println(p.item);
     }
 
     public T removeFirst() {

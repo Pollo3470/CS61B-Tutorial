@@ -101,6 +101,7 @@ public class IntList {
             pC = pC.rest;
             pA = pA.rest;
         }
+        pC.first = pA.first;
         pC.rest = B;
         return C;
     }

@@ -95,7 +95,7 @@ public class LinkedListDequeTest {
 		addIsEmptySizeTest();
 		addRemoveTest();
 
-		LinkedListDeque<Integer> test = new LinkedListDeque<Integer>();
+		ArrayDeque<Integer> test = new ArrayDeque<>();
 		test.addFirst(12);
 		test.addFirst(24);
 		test.addLast(6);
@@ -103,5 +103,12 @@ public class LinkedListDequeTest {
 		System.out.println(test.get(1));
 		System.out.println(test.get(2));
 		test.printDeque();
+		long start = System.nanoTime();
+		for (int i = 0; i < 100000000; i++) {
+			test.addLast(1);
+		}
+		long end = System.nanoTime();
+		long duration = end - start;
+		System.out.println("Time: "+ duration);
 	}
 }

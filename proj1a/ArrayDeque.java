@@ -53,10 +53,10 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for (T item :
-                array) {
-            System.out.print(item);
+        for (int i = 0; i < size - 1; i++) {
+            System.out.print(array[i] + " ");
         }
+        System.out.println(array[size - 1]);
     }
 
     public T removeFirst() {

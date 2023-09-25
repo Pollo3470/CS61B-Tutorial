@@ -64,6 +64,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (isEmpty()) {
+            return null;
+        }
         if (size == capacity / 4 && capacity > 10) {
             shrink();
         }
@@ -74,6 +77,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (isEmpty()) {
+            return null;
+        }
         if (size == capacity / 4 && capacity > 10) {
             shrink();
         }

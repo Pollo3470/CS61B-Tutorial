@@ -23,13 +23,6 @@ public class ArrayDeque<T> {
         size = 0;
     }
 
-    public ArrayDeque(ArrayDeque other) {
-        capacity = other.capacity;
-        size = other.size;
-        array = (T[]) new Object[other.capacity];
-        System.arraycopy(other.array, 0, array, 0, size);
-    }
-
     public void addFirst(T item) {
         if (size == capacity) {
             expand();

@@ -23,15 +23,6 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    public LinkedListDeque(LinkedListDeque other) {
-        this();
-        Node p = other.sentinel;
-        while (p != null) {
-            this.addLast(p.item);
-            p = p.next;
-        }
-    }
-
     public void addFirst(T item) {
         sentinel.next = new Node(item, sentinel, sentinel.next);
         sentinel.next.next.previous = sentinel.next;
@@ -99,7 +90,7 @@ public class LinkedListDeque<T> {
     }
 
     public T getRecursive(int index) {
-        Node p = this.sentinel;
+        Node p = this.sentinel.next;
         return getRecursive_(index, p);
     }
 

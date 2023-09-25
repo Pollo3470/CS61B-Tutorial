@@ -100,13 +100,13 @@ public class LinkedListDeque<T> {
 
     public T getRecursive(int index) {
         Node p = this.sentinel;
-        return _getRecursive(index, p);
+        return getRecursive_(index, p);
     }
 
-    public T _getRecursive(int index, Node p) {
+    private T getRecursive_(int index, Node p) {
         if (index == 0) {
             return p.item;
         }
-        return _getRecursive(index - 1, p.next);
+        return getRecursive_(index - 1, p.next);
     }
 }

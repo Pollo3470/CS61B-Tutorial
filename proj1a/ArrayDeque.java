@@ -1,17 +1,8 @@
 public class ArrayDeque<T> {
     private int size;
-    private int capacity;
     private T[] array;
 
-    private void expand() {
-        capacity *= 2;
-        T[] newArray = (T[]) new Object[capacity];
-        System.arraycopy(array, 0, newArray, 0, size);
-        array = newArray;
-    }
-
-    private void shrink() {
-        capacity /= 2;
+    private void resize(int capacity) {
         T[] newArray = (T[]) new Object[capacity];
         System.arraycopy(array, 0, newArray, 0, size);
         array = newArray;
@@ -19,22 +10,22 @@ public class ArrayDeque<T> {
 
     public ArrayDeque() {
         array = (T[]) new Object[10];
-        capacity = 10;
         size = 0;
     }
 
     public void addFirst(T item) {
-        if (size == capacity) {
-            expand();
+        if (size == array.length) {
+            resize(size * 2);
         }
+
         System.arraycopy(array, 0, array, 1, size);
         array[0] = item;
         size += 1;
     }
 
     public void addLast(T item) {
-        if (size == capacity) {
-            expand();
+        if (size == array.length) {
+            resize(size * 2);
         }
 
         array[size] = item;
@@ -60,8 +51,8 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        if (size == capacity / 4 && capacity > 10) {
-            shrink();
+        if (size == array.length / 4 && array.length > 10) {
+            resize(size / 2);
         }
         size -= 1;
         T item = array[0];
@@ -73,8 +64,8 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        if (size == capacity / 4 && capacity > 10) {
-            shrink();
+        if (size == array.length / 4 && array.length > 10) {
+            resize(size / 2);
         }
         size -= 1;
         T item = array[size];

@@ -65,7 +65,7 @@ public class ArrayDeque<T> {
         T item = array[nextFirst + 1];
         array[nextFirst + 1] = null;
         nextFirst += 1;
-        size -=1;
+        size -= 1;
 
         return item;
     }
@@ -82,6 +82,7 @@ public class ArrayDeque<T> {
         T item = array[nextLast - 1];
         array[nextLast - 1] = null;
         nextLast -= 1;
+        size -= 1;
 
         return item;
     }

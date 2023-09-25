@@ -31,14 +31,18 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        if (size == capacity) expand();
+        if (size == capacity) {
+            expand();
+        }
         System.arraycopy(array, 0, array, 1, size);
         array[0] = item;
         size += 1;
     }
 
     public void addLast(T item) {
-        if (size >= capacity) expand();
+        if (size == capacity) {
+            expand();
+        }
 
         array[size] = item;
         size += 1;
@@ -60,7 +64,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (size <= capacity / 4) shrink();
+        if (size == capacity / 4 && capacity > 10) {
+            shrink();
+        }
         size -= 1;
         T item = array[0];
         System.arraycopy(array, 1, array, 0, size);
@@ -68,7 +74,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (size <= capacity / 4) shrink();
+        if (size == capacity / 4 && capacity > 10) {
+            shrink();
+        }
         size -= 1;
         T item = array[size];
         array[size] = null;

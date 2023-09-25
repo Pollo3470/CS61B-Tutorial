@@ -66,7 +66,7 @@ public class ArrayDeque<T> {
         }
         size -= 1;
         if (size == array.length / 4 && array.length > 10) {
-            resize(size / 2);
+            resize(size * 2);
         }
         T item = array[size];
         array[size] = null;

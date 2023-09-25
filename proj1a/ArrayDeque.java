@@ -51,10 +51,10 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
+        size -= 1;
         if (size == array.length / 4 && array.length > 10) {
             resize(size / 2);
         }
-        size -= 1;
         T item = array[0];
         System.arraycopy(array, 1, array, 0, size);
         return item;
@@ -64,10 +64,10 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
+        size -= 1;
         if (size == array.length / 4 && array.length > 10) {
             resize(size / 2);
         }
-        size -= 1;
         T item = array[size];
         array[size] = null;
         return item;

@@ -91,13 +91,13 @@ public class LinkedListDeque<T> {
 
     public T getRecursive(int index) {
         Node p = this.sentinel.next;
-        return getRecursive_(index, p);
+        return getRecursive(index, p);
     }
 
-    private T getRecursive_(int index, Node p) {
+    private T getRecursive(int index, Node p) {
         if (index == 0) {
             return p.item;
         }
-        return getRecursive_(index - 1, p.next);
+        return getRecursive(index - 1, p.next);
     }
 }

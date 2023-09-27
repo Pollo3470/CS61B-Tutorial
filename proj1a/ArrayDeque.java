@@ -1,25 +1,31 @@
 public class ArrayDeque<T> {
     private int size;
+    // 从数组最后一位开始
     private int nextFirst;
+    // 从数组第一位开始
     private int nextLast;
     private T[] array;
 
     private void resize(int capacity) {
         T[] newArray = (T[]) new Object[capacity];
-        System.arraycopy(array, nextFirst + 1, newArray, capacity / 2 - size / 2, size);
-        nextFirst = capacity / 2 - size / 2 - 1;
-        nextLast = nextFirst + size + 1;
+
+        if (nextFirst < array.length - 1) {
+            System.arraycopy(array, nextFirst + 1, newArray, 0, array.length - nextFirst - 1);
+        }
+        System.arraycopy(array, 0, newArray, array.length - nextFirst - 1, nextLast);
+        nextFirst = capacity - 1;
+        nextLast = size;
         array = newArray;
     }
 
     public ArrayDeque() {
         array = (T[]) new Object[10];
-        nextFirst = 4;
-        nextLast = 5;
+        nextFirst = 9;
+        nextLast = 0;
     }
 
     public void addFirst(T item) {
-        if (nextFirst < 0) {
+        if (nextFirst == nextLast) {
             resize(array.length * 2);
         }
 
@@ -29,7 +35,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if (nextLast >= array.length) {
+        if (nextFirst == nextLast) {
             resize(size * 2);
         }
 
@@ -47,8 +53,11 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < array.length - nextFirst - 1; i++) {
             System.out.print(array[nextFirst + 1 + i] + " ");
+        }
+        for (int i = 0; i < nextLast - 1; i++) {
+            System.out.print(array[i] + " ");
         }
         System.out.println(array[nextLast - 1]);
     }
@@ -58,6 +67,8 @@ public class ArrayDeque<T> {
             return null;
         }
 
+        size -= 1;
+
         if (size == array.length / 4 && array.length > 10) {
             resize(size * 2);
         }
@@ -65,7 +76,6 @@ public class ArrayDeque<T> {
         T item = array[nextFirst + 1];
         array[nextFirst + 1] = null;
         nextFirst += 1;
-        size -= 1;
 
         return item;
     }
@@ -75,6 +85,8 @@ public class ArrayDeque<T> {
             return null;
         }
 
+        size -= 1;
+
         if (size == array.length / 4 && array.length > 10) {
             resize(size * 2);
         }
@@ -82,7 +94,6 @@ public class ArrayDeque<T> {
         T item = array[nextLast - 1];
         array[nextLast - 1] = null;
         nextLast -= 1;
-        size -= 1;
 
         return item;
     }
@@ -91,6 +102,6 @@ public class ArrayDeque<T> {
         if (index >= size) {
             return null;
         }
-        return array[nextFirst + 1 + index];
+        return array[(nextFirst + 1 + index) % (array.length)];
     }
 }

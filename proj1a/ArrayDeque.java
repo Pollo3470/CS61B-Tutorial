@@ -1,4 +1,7 @@
 public class ArrayDeque<T> {
+    /*
+     * index => (nextFirst + 1 + index) % array.length
+     * */
     private int size;
     // 从数组最后一位开始
     private int nextFirst;
@@ -30,7 +33,7 @@ public class ArrayDeque<T> {
         }
 
         array[nextFirst] = item;
-        nextFirst -= 1;
+        nextFirst = (array.length + nextFirst - 1) % array.length;
         size += 1;
     }
 
@@ -40,7 +43,7 @@ public class ArrayDeque<T> {
         }
 
         array[nextLast] = item;
-        nextLast += 1;
+        nextLast = (nextLast + 1) % array.length;
         size += 1;
     }
 
@@ -53,11 +56,8 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for (int i = 0; i < array.length - nextFirst - 1; i++) {
-            System.out.print(array[nextFirst + 1 + i] + " ");
-        }
-        for (int i = 0; i < nextLast - 1; i++) {
-            System.out.print(array[i] + " ");
+        for (int i = 0; i < size - 1; i++) {
+            System.out.print(array[(nextFirst + 1 + i) % array.length] + " ");
         }
         System.out.println(array[nextLast - 1]);
     }
@@ -73,9 +73,9 @@ public class ArrayDeque<T> {
             resize(size * 2);
         }
 
-        T item = array[nextFirst + 1];
-        array[nextFirst + 1] = null;
-        nextFirst += 1;
+        T item = array[(nextFirst + 1) % array.length];
+        array[(nextFirst + 1) % array.length] = null;
+        nextFirst = (nextFirst + 1) % array.length;
 
         return item;
     }
@@ -91,9 +91,9 @@ public class ArrayDeque<T> {
             resize(size * 2);
         }
 
-        T item = array[nextLast - 1];
-        array[nextLast - 1] = null;
-        nextLast -= 1;
+        T item = array[(array.length + nextLast - 1) % array.length];
+        array[(array.length + nextLast - 1) % array.length] = null;
+        nextLast = (array.length + nextLast - 1) % array.length;
 
         return item;
     }
@@ -102,6 +102,6 @@ public class ArrayDeque<T> {
         if (index >= size) {
             return null;
         }
-        return array[(nextFirst + 1 + index) % (array.length)];
+        return array[(nextFirst + 1 + index) % array.length];
     }
 }

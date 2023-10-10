@@ -20,6 +20,9 @@ public class Palindrome {
     }
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
+        if (cc == null) {
+            return false;
+        }
         Deque<Character> wordDeque = wordToDeque(word);
         int size = wordDeque.size();
         for (int i = 0; i < size / 2; i++) {
